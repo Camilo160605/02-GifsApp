@@ -7,10 +7,17 @@ import { Component } from '@angular/core';
         <input type="text"
         class="form-control"
         placeholder="Buscar Gifs..."
+        (keyup.enter)="searchTag(txtTagInput.value)"
+        #txtTagInput
         >
     `
 })
 
 export class SearchBoxComponent {
     constructor() { }
+
+    searchTag( newTag : string){
+        console.log({newTag});
+        
+    }
 }
