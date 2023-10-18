@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomePageComponent } from './pages/home/home-page.component';
@@ -17,7 +17,7 @@ import { CardListComponent } from './components/card-list/card-list.component';
     HomePageComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class GifsModule { }

@@ -1,3 +1,5 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
+// El httpClientModule se importa en el modulo de la app 
 import { Injectable } from '@angular/core';
 
 
@@ -8,8 +10,10 @@ import { Injectable } from '@angular/core';
 export class GifsService {
 
     private _tagsHistory : string[] = [];
+    private apiKey : string = 'vbHJ02ghlM9MhK09q7N9YczEAjb79ken';
+    private serviceURL: string = 'https://api.giphy.com/v1/gifs';
 
-    constructor() { }
+    constructor( private http : HttpClient ) { }
 
     get tagsHistory(){
         return [...this._tagsHistory];
@@ -37,7 +41,21 @@ export class GifsService {
 
         this.organizeHistory(tag)
         // unshift añade elemtos al inicio del array
-        
+
+        const params = new HttpParams()
+        .set('api_key', this.apiKey)
+        // La key proporcionada en la api
+        .set('limit','10')
+        // Limite de datos que puede traer la request
+        .set('q',tag)
+        // Nombre del objeto que quiere buscar
+
+        // Establecemos los parametros que tiene que tener la request
+
+        this.http.get(`${this.serviceURL}/search`, {params})
+        .subscribe( resp => {
+            console.log(resp);
+            // Data traída de la API
+        })
     }
-    
 }
