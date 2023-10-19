@@ -14,5 +14,8 @@ export class SidebarComponent {
     return this.gifService.tagsHistory;
     // obtenemos todos los datos ingresados por el usuario desde el servicio "GifService"
   }
+  historySearch(tag : string):void{
+    this.gifService.tagsHistory;
+  }
 
 }

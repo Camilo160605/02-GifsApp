@@ -58,7 +58,6 @@ export class GifsService {
         .subscribe( resp => {
             this.gifList = resp.data
             // Data traída de la API
-            console.log({resp : resp.data});
         })
     }
 }
