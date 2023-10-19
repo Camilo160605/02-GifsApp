@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 // El httpClientModule se importa en el modulo de la app 
 import { Injectable } from '@angular/core';
+import { Gif, SearchResponse } from '../interfaces/gifs.interface';
 
 
 
@@ -9,6 +10,7 @@ import { Injectable } from '@angular/core';
 
 export class GifsService {
 
+    public gifList : Gif[] = [];
     private _tagsHistory : string[] = [];
     private apiKey : string = 'vbHJ02ghlM9MhK09q7N9YczEAjb79ken';
     private serviceURL: string = 'https://api.giphy.com/v1/gifs';
@@ -52,10 +54,11 @@ export class GifsService {
 
         // Establecemos los parametros que tiene que tener la request
 
-        this.http.get(`${this.serviceURL}/search`, {params})
+        this.http.get<SearchResponse>(`${this.serviceURL}/search`, {params})
         .subscribe( resp => {
-            console.log(resp);
+            this.gifList = resp.data
             // Data traída de la API
+            console.log({resp : resp.data});
         })
     }
 }
