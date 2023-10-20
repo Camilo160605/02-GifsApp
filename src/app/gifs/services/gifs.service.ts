@@ -35,6 +35,12 @@ export class GifsService {
 
         this._tagsHistory = this.tagsHistory.splice(0,10);
         // limitamos que el tamaño del array no supere los 10 valores
+        this.saveHistoryLocalStorage()
+        //Guardamos el historial en el local storage
+    }
+
+    saveHistoryLocalStorage(){
+        localStorage.setItem('History',JSON.stringify(this._tagsHistory))
     }
 
     searchTag(tag : string):void {

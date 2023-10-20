@@ -6,7 +6,7 @@
         #search
         *ngFor="let tag of tags; index as i"
         class="list-group-item list-group-item-action"
-        (click)="historySearch(tag)"
+        (click)="searchTag(tag)"
         >
             {{ tag | titlecase}} 
         </button>
