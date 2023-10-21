@@ -8,12 +8,13 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface SearchResponse {
-    data:       Gifs[];
+    data:       Gif[];
     pagination: Pagination;
     meta:       Meta;
 }
 
-export interface Gifs {
+
+export interface Gif {
     type:                       Type;
     id:                         string;
     url:                        string;

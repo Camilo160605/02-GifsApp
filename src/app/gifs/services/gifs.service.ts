@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 // El httpClientModule se importa en el modulo de la app 
 import { Injectable } from '@angular/core';
-import { Gifs, SearchResponse } from '../interfaces/gifs.interface';
+import { Gif, SearchResponse } from '../interfaces/gifs.interface';
 
 
 
@@ -10,7 +10,8 @@ import { Gifs, SearchResponse } from '../interfaces/gifs.interface';
 
 export class GifsService {
 
-    private gifList : Gifs[] = [];
+
+    public gifList : Gif[] = [];
     private _tagsHistory : string[] = [];
     private apiKey : string = 'vbHJ02ghlM9MhK09q7N9YczEAjb79ken';
     private serviceURL: string = 'https://api.giphy.com/v1/gifs';
@@ -35,6 +36,12 @@ export class GifsService {
 
         this._tagsHistory = this.tagsHistory.splice(0,10);
         // limitamos que el tamaño del array no supere los 10 valores
+        this.saveHistoryLocalStorage()
+        //Guardamos el historial en el local storage
+    }
+
+    saveHistoryLocalStorage(){
+        localStorage.setItem('History',JSON.stringify(this._tagsHistory))
     }
 
     searchTag(tag : string):void {
@@ -54,13 +61,9 @@ export class GifsService {
 
         // Establecemos los parametros que tiene que tener la request
 
-        this.http.get<SearchResponse>(`${this.serviceURL}/search`,{params})
-        // Para seguir el tipado de TypeScript es siempre ideal darle una interface a la request que se tenga que hacer
+        this.http.get<SearchResponse>(`${this.serviceURL}/search`, {params})
         .subscribe( resp => {
-            this.gifList = resp.data;
-            // Asignamos la data a la variable asignada
-
-            console.log({gifs : this.gifList});
+            this.gifList = resp.data
             // Data traída de la API
         })
     }
